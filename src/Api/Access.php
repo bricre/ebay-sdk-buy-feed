@@ -3,6 +3,7 @@
 namespace Ebay\Buy\Feed\Api;
 
 use Ebay\Buy\Feed\Model\ApplicationAccess;
+use OpenAPI\Runtime\UnexpectedResponse;
 
 class Access extends AbstractAPI
 {
@@ -16,9 +17,9 @@ class Access extends AbstractAPI
      * sites and other restrictions, see <a
      * href="/api-docs/buy/feed/overview.html#API">API Restrictions</a>.</p>.
      *
-     * @return ApplicationAccess
+     * @return ApplicationAccess|UnexpectedResponse
      */
-    public function get(): ApplicationAccess
+    public function get()
     {
         return $this->request(
         'getAccess',

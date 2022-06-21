@@ -4,6 +4,7 @@ namespace Ebay\Buy\Feed\Api;
 
 use Ebay\Buy\Feed\Model\FeedType;
 use Ebay\Buy\Feed\Model\FeedTypeSearchResponse;
+use OpenAPI\Runtime\UnexpectedResponse;
 
 class Type extends AbstractAPI
 {
@@ -26,9 +27,9 @@ class Type extends AbstractAPI
      *                             target="_blank">Supported feed types</a> to learn more about the feed types
      *                             supported by the Feed API.</span>
      *
-     * @return FeedType
+     * @return FeedType|UnexpectedResponse
      */
-    public function get(string $feed_type_id): FeedType
+    public function get(string $feed_type_id)
     {
         return $this->request(
         'getFeedType',
@@ -70,9 +71,9 @@ class Type extends AbstractAPI
      *                       /><br />See <a href="/api-docs/buy/feed/v1/overview.html#API">API
      *                       Restrictions</a> for information on supported sites.
      *
-     * @return FeedTypeSearchResponse
+     * @return FeedTypeSearchResponse|UnexpectedResponse
      */
-    public function gets(array $queries = []): FeedTypeSearchResponse
+    public function gets(array $queries = [])
     {
         return $this->request(
         'getFeedTypes',

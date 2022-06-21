@@ -4,6 +4,7 @@ namespace Ebay\Buy\Feed\Api;
 
 use Ebay\Buy\Feed\Model\FileMetadata;
 use Ebay\Buy\Feed\Model\FileMetadataSearchResponse;
+use OpenAPI\Runtime\UnexpectedResponse;
 
 class File extends AbstractAPI
 {
@@ -34,9 +35,9 @@ class File extends AbstractAPI
      *                        EBAY_US</code>.<br /><br />For a list of supported sites and other restrictions,
      *                        see <a href="/api-docs/buy/feed/overview.html#API">API Restrictions</a>.
      *
-     * @return mixed
+     * @return UnexpectedResponse
      */
-    public function download(string $file_id, array $headers = []): mixed
+    public function download(string $file_id, array $headers = []): UnexpectedResponse
     {
         return $this->request(
         'downloadFile',
@@ -52,10 +53,9 @@ class File extends AbstractAPI
      * Use the <b>getFile</b> method to fetch the details of a feed file available to
      * download, as specified by the file's <b>file_id</b>.</p><p>Details in the
      * response include: the feed's <b>file_id</b>, the date it became available, eBay
-     * categories that support the feed, its frequency (currently only HOURLY is
-     * supported), the time span it covers, its feed type, its format (currently only
-     * TSV is available), its size in bytes, the schema under which it was pulled, and
-     * the marketplaces it applies to.</p>.
+     * categories that support the feed, its frequency, the time span it covers, its
+     * feed type, its format (currently only TSV is available), its size in bytes, the
+     * schema under which it was pulled, and the marketplaces it applies to.</p>.
      *
      * @param string $file_id Unique identifier of feed file. Feed file IDs can be
      *                        retrieved with the <b>getFiles</b> method.
@@ -65,9 +65,9 @@ class File extends AbstractAPI
      *                        EBAY_US</code>.<br /><br />For a list of supported sites and other restrictions,
      *                        see <a href="/api-docs/buy/feed/overview.html#API">API Restrictions</a>.
      *
-     * @return FileMetadata
+     * @return FileMetadata|UnexpectedResponse
      */
-    public function get(string $file_id, array $headers = []): FileMetadata
+    public function get(string $file_id, array $headers = [])
     {
         return $this->request(
         'getFile',
@@ -82,14 +82,14 @@ class File extends AbstractAPI
     /**
      * <p>The <b>getFiles</b> method provides a list of the feed files available for
      * download.</p>Details for each feed returned include the date the feed was
-     * generated, the frequency with which it is pulled (currently only HOURLY is
-     * supported), its feed type, its <b>fileid</b>, its format (currently only TSV is
-     * supported), the eBay marketplaces it applies to, the schema version under which
-     * it was generated, its size in bytes, and the time span it covers (in
-     * hours).</p><p>You can limit your search results by feed type, marketplace,
-     * scope, and eBay L1 category.</p><h3><b>Restrictions </b></h3><p>For a list of
-     * supported sites and other restrictions, see <a
-     * href="/api-docs/buy/feed/overview.html#API">API Restrictions</a>.</p>.
+     * generated, the frequency with which it is pulled, its feed type, its
+     * <b>fileid</b>, its format (currently only TSV is supported), the eBay
+     * marketplaces it applies to, the schema version under which it was generated, its
+     * size in bytes, and the time span it covers (in hours).</p><p>You can limit your
+     * search results by feed type, marketplace, scope, and eBay L1
+     * category.</p><h3><b>Restrictions </b></h3><p>For a list of supported sites and
+     * other restrictions, see <a href="/api-docs/buy/feed/overview.html#API">API
+     * Restrictions</a>.</p>.
      *
      * @param array $queries options:
      *                       'category_ids'	string	This query parameter is used to specify one or more eBay
@@ -125,9 +125,9 @@ class File extends AbstractAPI
      *                       supported sites and other restrictions, see <a
      *                       href="/api-docs/buy/feed/overview.html#API">API Restrictions</a>.
      *
-     * @return FileMetadataSearchResponse
+     * @return FileMetadataSearchResponse|UnexpectedResponse
      */
-    public function gets(array $queries = [], array $headers = []): FileMetadataSearchResponse
+    public function gets(array $queries = [], array $headers = [])
     {
         return $this->request(
         'getFiles',
